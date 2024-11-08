@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import { useForegroundPermissions } from 'expo-location';
 import { Linking, Platform } from 'react-native';
 import { Container, Message, Slogan, Title } from './styles';
-import { Button } from '../../components/Button';
+import { Button } from '@components/Button';
 
 export function Home() {
   const [locationForegroundPermission, requestLocationForegroundPermission] = useForegroundPermissions();

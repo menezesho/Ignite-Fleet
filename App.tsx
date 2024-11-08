@@ -2,14 +2,14 @@ import { ThemeProvider } from 'styled-components/native';
 import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/roboto';
 import { StatusBar } from 'react-native';
 
-import { Loading } from './src/components/Loading';
-import { Home } from './src/screens/Home';
+import { Loading } from '@components/Loading';
+import { Home } from '@screens/Home';
 
-import theme from './src/theme';
+import theme from '@theme/index';
 
 export default function App() {
   const [isFontsLoaded] = useFonts({ Roboto_400Regular, Roboto_700Bold });
-  
+
   if (!isFontsLoaded) {
     return <Loading />;
   }
