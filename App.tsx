@@ -3,7 +3,7 @@ import { useFonts, Roboto_400Regular, Roboto_700Bold } from '@expo-google-fonts/
 import { StatusBar } from 'react-native';
 
 import { Loading } from './src/components/Loading';
-import { SignIn } from './src/screens/SignIn';
+import { Home } from './src/screens/Home';
 
 import theme from './src/theme';
 
@@ -21,7 +21,7 @@ export default function App() {
         backgroundColor='transparent'
         translucent
       />
-      <SignIn />
+      <Home />
     </ThemeProvider>
   );
 }
