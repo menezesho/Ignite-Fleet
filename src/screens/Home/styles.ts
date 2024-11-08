@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import theme from '../../theme';
 
-export const Container = styled.ImageBackground`
+export const Container = styled.View`
   flex: 1;
   justify-content: center;
   padding: 52px;
@@ -22,4 +22,11 @@ export const Slogan = styled.Text`
   text-align: center;
 
   margin-bottom: 32px;
+`;
+
+export const Message = styled.Text`
+  color: ${theme.COLORS.GRAY_100};
+  font-family: ${theme.FONT_FAMILY.REGULAR};
+  text-align: center;
+  margin-top: 24px;
 `;
