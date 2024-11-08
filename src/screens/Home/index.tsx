@@ -1,11 +1,14 @@
-import React, { useEffect } from 'react';
-import { useForegroundPermissions } from 'expo-location';
+import React, { useEffect, useState } from 'react';
+import { LocationAccuracy, useForegroundPermissions, watchPositionAsync, LocationSubscription } from 'expo-location';
 import { Linking, Platform } from 'react-native';
+import { getAddressLocation } from '@utils/getAddressLoation';
 import { Container, Message, Slogan, Title } from './styles';
 import { Button } from '@components/Button';
+import { Loading } from '@components/Loading';
 
 export function Home() {
   const [locationForegroundPermission, requestLocationForegroundPermission] = useForegroundPermissions();
+  const [isLoadingLocation, setIsLoadingLocation] = useState(true);
 
   async function handleAllowLocation() {
     try {
@@ -30,6 +33,23 @@ export function Home() {
     requestLocationForegroundPermission();
   }, []);
 
+  useEffect(() => {
+    if (!locationForegroundPermission?.granted) return;
+
+    let subscription: LocationSubscription;
+
+    watchPositionAsync({
+      accuracy: LocationAccuracy.High,
+      timeInterval: 5000,
+    }, (location) => {
+      getAddressLocation(location.coords).then((address) => {
+        console.log(address);
+      }).finally(() => setIsLoadingLocation(false));
+    }).then((response) => subscription = response);
+
+    return () => subscription?.remove();
+  }, [locationForegroundPermission]);
+
   if (!locationForegroundPermission?.granted) {
     return (
       <Container>
@@ -44,6 +64,10 @@ export function Home() {
         />
       </Container>
     );
+  }
+
+  if (isLoadingLocation) {
+    return <Loading />;
   }
 
   return (
